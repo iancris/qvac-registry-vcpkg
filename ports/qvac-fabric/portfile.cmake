@@ -1,8 +1,8 @@
 vcpkg_from_github(
   OUT_SOURCE_PATH SOURCE_PATH
   REPO iancris/qvac-fabric-llm.cpp
-  REF fabb504d355c2b498cbed3ad1d1f67962737ea7d
-  SHA512 a3c82275f482c1adb3f7981a9a6e89746c986d81bd9c3320d9712260ce7ab7c815b3de7d0dead023e52972db24046dcf608473c020894faad8c8e7981eef2d91
+  REF b86105c157de3a2b1befb81a1aca411730993901
+  SHA512 0
 )
 
 vcpkg_check_features(
