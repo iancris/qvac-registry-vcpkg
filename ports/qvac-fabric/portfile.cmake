@@ -1,8 +1,8 @@
 vcpkg_from_github(
   OUT_SOURCE_PATH SOURCE_PATH
   REPO iancris/qvac-fabric-llm.cpp
-  REF e6ca45905af7199e70e12ba8edf7f1e4236d644b
-  SHA512 b0dfefb7041aaa76cbc508f7663ac44518bf7bc68635f38ef875df1857bda719c28b94db5a4d6deaa6e48534b947993445981442c6a96ed4c6462c5c319b84bf
+  REF bfa387c4e639a312bfb07dd2572a753edb4f42e6
+  SHA512 a155c4a4bbadc233edaca8ad087d3de93ff13a4756f4ad8063691f7f282ab5b88af98ea3bfc417f37f4ce1b04361de7e22613ab359553141e42e886d468ccb51
 )
 
 # Upstream CMake options only — passed through to vcpkg_cmake_configure.
@@ -202,6 +202,9 @@ vcpkg_cmake_configure(
     -DGGML_NATIVE=OFF
     -DGGML_CCACHE=OFF
     -DGGML_LLAMAFILE=OFF
+    # QVAC-21257 diagnostic: compile the Vulkan per-op profiler in unconditionally
+    # (no device env var needed). Emits per-op GPU timing for the CLIP encode graph.
+    -DFORCE_GGML_VK_PERF_LOGGER=ON
     -DLLAMA_CURL=OFF
     -DLLAMA_BUILD_TESTS=OFF
     -DLLAMA_BUILD_TOOLS=OFF
