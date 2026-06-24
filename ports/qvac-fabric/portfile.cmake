@@ -202,9 +202,6 @@ vcpkg_cmake_configure(
     -DGGML_NATIVE=OFF
     -DGGML_CCACHE=OFF
     -DGGML_LLAMAFILE=OFF
-    # QVAC-21257 diagnostic: compile the Vulkan per-op profiler in unconditionally
-    # (no device env var needed). Emits per-op GPU timing for the CLIP encode graph.
-    -DFORCE_GGML_VK_PERF_LOGGER=ON
     -DLLAMA_CURL=OFF
     -DLLAMA_BUILD_TESTS=OFF
     -DLLAMA_BUILD_TOOLS=OFF
@@ -214,6 +211,11 @@ vcpkg_cmake_configure(
     ${LLAMA_OPTIONS}
     ${PLATFORM_OPTIONS}
     ${FEATURE_OPTIONS}
+    # QVAC-21257 diagnostic: force the Vulkan per-op profiler ON. MUST come AFTER
+    # ${FEATURE_OPTIONS} — the first vcpkg_check_features maps force-profiler ->
+    # FORCE_GGML_VK_PERF_LOGGER and emits -DFORCE_GGML_VK_PERF_LOGGER=OFF when the
+    # feature is not requested; CMake takes the last -D, so this must win.
+    -DFORCE_GGML_VK_PERF_LOGGER=ON
 )
 
 vcpkg_cmake_install()
