@@ -1,8 +1,8 @@
 vcpkg_from_github(
   OUT_SOURCE_PATH SOURCE_PATH
   REPO iancris/qvac-fabric-llm.cpp
-  REF 4be5cfe9f3a318f9d8b85ed244c4c5b65ee3210f
-  SHA512 6e61b315481847ff46774a4f04bbcef3d28943861ce8361e0a0c7f24218ff80a502bec5da9e270f363225b276fe3a4d15309cb45aabad4623496ac6d087a0cb7
+  REF 430890de68f583f098215b6d36fb37b69b2f3e63
+  SHA512 009b7e97a3e0f2a1dc57925dadd03b582387c023bb11d0e0b616d5e7596cc286f9406fe2548390462c7acf63cbb46b4321d09672ba683f68c85830f8a2e77f39
 )
 
 # Upstream CMake options only — passed through to vcpkg_cmake_configure.
