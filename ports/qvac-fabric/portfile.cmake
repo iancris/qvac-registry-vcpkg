@@ -211,11 +211,10 @@ vcpkg_cmake_configure(
     ${LLAMA_OPTIONS}
     ${PLATFORM_OPTIONS}
     ${FEATURE_OPTIONS}
-    # QVAC-21257 diagnostic: force the Vulkan per-op profiler ON. MUST come AFTER
-    # ${FEATURE_OPTIONS} — the first vcpkg_check_features maps force-profiler ->
-    # FORCE_GGML_VK_PERF_LOGGER and emits -DFORCE_GGML_VK_PERF_LOGGER=OFF when the
-    # feature is not requested; CMake takes the last -D, so this must win.
-    -DFORCE_GGML_VK_PERF_LOGGER=ON
+    # QVAC-21257: profiler OFF for the accurate CPU-vs-GPU comparison runs — the
+    # per-op VK profiler forces a synchronous per-graph path on the GPU cell only,
+    # which would distort the GPU-vs-CPU numbers. (Re-add -DFORCE_GGML_VK_PERF_LOGGER=ON
+    # here, after ${FEATURE_OPTIONS}, to re-enable per-op profiling.)
 )
 
 vcpkg_cmake_install()
