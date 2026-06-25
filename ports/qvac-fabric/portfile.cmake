@@ -1,8 +1,8 @@
 vcpkg_from_github(
   OUT_SOURCE_PATH SOURCE_PATH
   REPO iancris/qvac-fabric-llm.cpp
-  REF ed910c040af3d54f8d7f1a92495bdd3ebd48b508
-  SHA512 a46d699b7fbb0ada9cf896393453e2eed07155d1d06ac8b2d91e3c438cb344ffa7da468c7fe725eb7e03a7190bf4058a9c1dbe0d2ec28bb6aacb4ab5d356723e
+  REF 6ee693f22f960d2f7f79656b3ee56cf51276ffaf
+  SHA512 fa4b1af542c50f39e73a21d8962a5ed85806fd1b4cd21421c93bb6ec34c44cf90819d844b998cb151c2eb10402d01083e29f530fc3eebfc461f671fea57321ad
 )
 
 # Upstream CMake options only — passed through to vcpkg_cmake_configure.
@@ -211,10 +211,10 @@ vcpkg_cmake_configure(
     ${LLAMA_OPTIONS}
     ${PLATFORM_OPTIONS}
     ${FEATURE_OPTIONS}
-    # QVAC-21257: profiler OFF for the accurate CPU-vs-GPU comparison runs — the
-    # per-op VK profiler forces a synchronous per-graph path on the GPU cell only,
-    # which would distort the GPU-vs-CPU numbers. (Re-add -DFORCE_GGML_VK_PERF_LOGGER=ON
-    # here, after ${FEATURE_OPTIONS}, to re-enable per-op profiling.)
+    # QVAC-21257: profiler ON during lever iteration (per-op GFLOPS attribution). MUST come after
+    # ${FEATURE_OPTIONS} so it overrides the feature-emitted -DFORCE_GGML_VK_PERF_LOGGER=OFF.
+    # (Remove this line for the final profiler-off confirmation run.)
+    -DFORCE_GGML_VK_PERF_LOGGER=ON
 )
 
 vcpkg_cmake_install()
