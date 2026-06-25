@@ -1,8 +1,8 @@
 vcpkg_from_github(
   OUT_SOURCE_PATH SOURCE_PATH
   REPO iancris/qvac-fabric-llm.cpp
-  REF ed910c040af3d54f8d7f1a92495bdd3ebd48b508
-  SHA512 a46d699b7fbb0ada9cf896393453e2eed07155d1d06ac8b2d91e3c438cb344ffa7da468c7fe725eb7e03a7190bf4058a9c1dbe0d2ec28bb6aacb4ab5d356723e
+  REF 6a2b2821d0aa872c5d4090d83d5997c7d86e6c26
+  SHA512 401cf20a88dde579212f8d30057de3d4f0ffd45263d8e28ca415e2ed36f43222cd8d3f22f5920e87b5b98bacbada7c05c540c61880e51d1e48434708e54667ca
 )
 
 # Upstream CMake options only — passed through to vcpkg_cmake_configure.
@@ -211,8 +211,8 @@ vcpkg_cmake_configure(
     ${LLAMA_OPTIONS}
     ${PLATFORM_OPTIONS}
     ${FEATURE_OPTIONS}
-    # QVAC-21257: profiler OFF (kept state = iter1+iter2). Re-add -DFORCE_GGML_VK_PERF_LOGGER=ON after
-    # ${FEATURE_OPTIONS} to re-enable per-op profiling for future lever iteration.
+    # QVAC-21257 Lever C: profiler ON to measure the fused-norm dispatch-count drop. After ${FEATURE_OPTIONS}.
+    -DFORCE_GGML_VK_PERF_LOGGER=ON
 )
 
 vcpkg_cmake_install()
