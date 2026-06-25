@@ -211,8 +211,8 @@ vcpkg_cmake_configure(
     ${LLAMA_OPTIONS}
     ${PLATFORM_OPTIONS}
     ${FEATURE_OPTIONS}
-    # QVAC-21257 Lever C: profiler ON to measure the fused-norm dispatch-count drop. After ${FEATURE_OPTIONS}.
-    -DFORCE_GGML_VK_PERF_LOGGER=ON
+    # QVAC-21257: profiler OFF (kept state = iter1 + iter2 + Lever C norm fusion). Re-add
+    # -DFORCE_GGML_VK_PERF_LOGGER=ON after ${FEATURE_OPTIONS} to re-enable per-op profiling.
 )
 
 vcpkg_cmake_install()
